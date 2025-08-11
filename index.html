@@ -177,6 +177,13 @@
 		}
 
 
+		.secondary {
+			position: absolute;
+			margin-top: 2px;
+			cursor: pointer;
+		}
+
+
 
 		#current-prayer {
 			font-size: 42px;
@@ -228,7 +235,7 @@
 		</div>
 
 		<div class="location">
-			<div id="location">📍 Getting location...</div>
+			<span id="location">📍 Getting location...</span> <span id="refresh-btn" class="btn secondary">⟳</span>
 			<div id="weather">
 				<img id="weather-icon" src="" alt="" style="display:none" />
 				<div id="weather-temp">--</div>
@@ -238,7 +245,7 @@
 
 		<div class="card">
 			<div class="card-section">
-				<strong>Now</strong>
+				<strong>Now</strong> <span id="mute-btn" class="btn">🔊</span>
 				<div id="current-prayer">--</div>
 			</div>
 
@@ -248,12 +255,7 @@
 			</div>
 		</div>
 
-		<div class="meta-row">
-			<div class="controls">
-				<button id="mute-btn" class="btn">🔊</button>
-				<button id="refresh-btn" class="btn secondary">⟳</button>
-			</div>
-		</div>
+
 
 		<div class="prayer-list" id="prayer-list"></div>
 
@@ -329,6 +331,7 @@
 			if (userCoords) {
 				fetchPrayerTimes(selectedDateGlobal);
 				fetchWeather(userCoords.latitude, userCoords.longitude);
+				location.reload();
 			}
 		});
 
@@ -594,9 +597,9 @@
 				const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${userCoords.latitude}&lon=${userCoords.longitude}`);
 				const j = await r.json();
 				const place = j.address && (j.address.city || j.address.town || j.address.village || j.address.state) || '';
-				$('location').textContent = `📍 ${place || 'Your Location'}`;
+				$('location').textContent = `\u00A0\u00A0\u00A0\u00A0📍${place || 'Your Location'}`;
 			} catch (e) {
-				$('location').textContent = '📍 Location Unavailable';
+				$('location').textContent = '\u00A0\u00A0\u00A0\u00A0📍Location Unavailable';
 			}
 			// fetch weather and prayers
 			fetchPrayerTimes(new Date());
