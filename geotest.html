@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Geolocation Test</title></head>
-  <body>
-    <button onclick="getLocation()">Get Location</button>
-    <p id="status"></p>
-    <script>
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (pos) => {
-              document.getElementById('status').textContent =
-                'Lat: ' + pos.coords.latitude + ', Lon: ' + pos.coords.longitude;
-            },
-            (err) => {
-              document.getElementById('status').textContent = 'Error: ' + err.message;
-            }
-          );
-        } else {
-          document.getElementById('status').textContent = 'Geolocation not supported.';
-        }
-      }
-    </script>
-  </body>
+
+<head>
+	<title>Geolocation Test</title>
+</head>
+
+<body>
+	<h2>Geolocation Test</h2>
+	<button onclick="getLocation()">Get Location</button>
+	<p id="status">Click the button to get location.</p>
+
+	<script>
+		function getLocation() {
+			var status = document.getElementById('status');
+			if (!navigator.geolocation) {
+				status.textContent = 'Geolocation is not supported by your browser.';
+				return;
+			}
+			status.textContent = 'Locating...';
+
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+					status.textContent = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+				},
+				(error) => {
+					status.textContent = `Error: ${error.message}`;
+				}
+			);
+		}
+
+	</script>
+</body>
+
 </html>
