@@ -9,27 +9,47 @@
 		body {
 			margin: 0;
 			font-family: 'Segoe UI', sans-serif;
-			background: #062c25;
+			background: none;
+			padding: 35px;
+			font-size: 18px;
 			color: white;
-			padding: 20px;
+			position: relative;
+			overflow-x: hidden;
 		}
 
+		body::before {
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image: url('background.jpg');
+			background-size: cover;
+			background-position: center;
+			filter: blur(18px) brightness(0.7);
+			/* blur + darken */
+			z-index: -1;
+		}
+
+
 		.container {
-			max-width: 420px;
+			max-width: 800px;
 			margin: auto;
 		}
 
 		.date-box {
 			display: flex;
 			justify-content: center;
-			/* horizontal center */
 			align-items: center;
-			/* vertical center */
-			text-align: center;
-			position: relative;
+			gap: 10px;
+			margin-bottom: 10px;
+			font-size: 20px;
+			font-weight: bold;
 			background-color: brown;
 			border-radius: 10px;
 			box-shadow: 0px 0px 22px 0px black;
+			height: 50px;
 		}
 
 		.location {
@@ -37,11 +57,11 @@
 			justify-content: space-between;
 			align-items: center;
 			margin: 10px 0;
-			font-size: 14px;
+			font-size: 16px;
 		}
 
 		h3 {
-			margin: 20px;
+			margin: 0;
 		}
 
 		.card {
@@ -49,32 +69,37 @@
 			padding: 20px;
 			border-radius: 16px;
 			margin-top: 10px;
-			height: 100px;
 			display: flex;
 			justify-content: space-between;
 			gap: 20px;
 			flex-wrap: wrap;
-			margin-bottom: 10px;
-
-			/* makes it responsive */
 		}
 
 		.card-section {
-			/*			flex: 1 1 100px;*/
-			/* grow/shrink with min width of 200px */
+			flex: 1 1 45%;
 			color: yellow;
-			font-weight:
 		}
 
 		.card h2 {
 			margin: 0;
-			font-size: 32px;
+			font-size: 36px;
+			color: white;
+		}
+
+		#digital-clock {
+			font-size: 50px;
+			font-weight: bold;
+			color: white;
+			line-height: 1.2;
+			text-align: right;
+			text-shadow: 0 0 0px white, 0 0 10px black, 0 0 10px #00ff99;
 		}
 
 		.prayer-list {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 10px;
+			gap: 12px;
+			margin-top: 20px;
 		}
 
 		.prayer-item {
@@ -84,13 +109,10 @@
 			align-items: center;
 			padding: 12px 16px;
 			border-radius: 12px;
-			width: calc(50% - 10px);
-			/* two per row with gap */
+			width: calc(50% - 6px);
 			box-sizing: border-box;
-			box-shadow: 0px 0px 22px 0px black;
-			border-radius: 10px;
+			font-size: 16px;
 		}
-
 
 		.now-tag {
 			background: #ffaa00;
@@ -98,7 +120,7 @@
 			border-radius: 8px;
 			color: black;
 			font-size: 12px;
-			margin-left: 10px;
+			margin-left: 8px;
 		}
 
 		.progress-section {
@@ -116,72 +138,84 @@
 			background: #083e34;
 			color: white;
 			border: none;
-			padding: 8px 16px;
+			padding: 10px 20px;
 			border-radius: 20px;
 			cursor: pointer;
+			font-size: 16px;
 		}
 
 		.tabs .active {
 			background: white;
 			color: #083e34;
+			font-weight: bold;
 		}
 
 		.calendar {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: flex-start;
-
 		}
 
 		.calendar-day {
-			width: 10.28%;
-			text-align: left;
-			/* Center inline content (text, inline-block) */
-			font-size: 12px;
-			margin: 4px;
+			width: 13%;
+			text-align: center;
+			font-size: 14px;
+			margin: 4px 0;
 			cursor: pointer;
-			display: flex;
-			justify-content: center;
-			/* Center content horizontally */
-			align-items: center;
-			box-shadow: 0px 0px 5px 0px black;
+			padding: 6px 4px;
 			border-radius: 10px;
-			/* Center content vertically */
+		}
+
+		.meta-row {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+			margin-top: 8px;
+			justify-content: flex-end;
+			border-radius: 10px;
+			/* Push items to the right */
+		}
+
+
+
+		#current-prayer {
+			font-size: 42px;
+			font-weight: bold;
+			color: goldenrod;
+			line-height: 1.2;
+			text-align: left;
 		}
 
 		.calendar-day.active {
 			background: white;
 			color: black;
-			padding: 1px;
-			border-radius: 10px;
-
+			font-weight: bold;
 		}
 
-		#digital-clock {
-			font-size: 50px;
-			/* responsive font size */
-			text-align: right;
-			font-weight: bolder;
-			color: red;
-			position: relative;
-			top: -20px;
-			color: lightgoldenrodyellow;
-			/* also responsive */
-			margin: 0;
-			text-shadow: 0 0 0px white, 0 0 10px black, 0 0 10px #00ff99;
-
-
-
+		#weather {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			font-size: 15px;
 		}
 
-		/*
-		@media (max-width: 1080px) {
-			#digital-clock {
-				font-size: 9vw;
-				top: 0;
+		#weather-icon {
+			width: 36px;
+			height: 36px;
+			display: inline-block;
+		}
+
+		@media (max-width: 600px) {
+			body {
+				font-size: 16px;
 			}
+
+			.card-section {
+				flex: 1 1 100%;
+			}
+
+
 		}
-*/
 
 	</style>
 </head>
@@ -189,92 +223,188 @@
 <body>
 	<div class="container">
 		<div class="date-box">
-			<h3 id="gregorian-date" style="float: left;">Today</h3> |
-			<h3 id="hijri-date" style="float: right;">Hijri Date</h3>
+			<div id="gregorian-date">Today</div> |
+			<div id="hijri-date">Hijri Date</div>
 		</div>
-		<div class="location"> <span id="location">📍 Getting location...</span> <span>✔️ Islamic Centre</span> </div>
+
+		<div class="location">
+			<div id="location">📍 Getting location...</div>
+			<div id="weather">
+				<img id="weather-icon" src="" alt="" style="display:none" />
+				<div id="weather-temp">--</div>
+				<div id="weather-wind">--</div>
+			</div>
+		</div>
+
 		<div class="card">
-			<div class="card-section" style="text-align: left;"> <strong>Now</strong>
-				<h2 id="current-prayer">--</h2>
-			</div>
 			<div class="card-section">
-				<p id="digital-clock"></p>
-
+				<strong>Now</strong>
+				<div id="current-prayer">--</div>
 			</div>
 
 
+			<div class="card-section">
+				<div id="digital-clock"></div>
+			</div>
 		</div>
+
+		<div class="meta-row">
+			<div class="controls">
+				<button id="mute-btn" class="btn">🔊</button>
+				<button id="refresh-btn" class="btn secondary">⟳</button>
+			</div>
+		</div>
+
 		<div class="prayer-list" id="prayer-list"></div>
+
 		<div class="progress-section">
 			<div class="tabs">
 				<button class="active" onclick="showWeek()">Week</button>
 				<button onclick="showMonth()">Month</button>
 			</div>
-			<div class="cal_main">
-				<div class="calendar" id="calendar"></div>
-			</div>
+			<div class="calendar" id="calendar"></div>
 		</div>
 	</div>
-	<div id="weather"> test
-		<span id="weather-temp"></span> |
-		<span id="weather-wind"></span>
-	</div>
+
+	<!-- audio element: update src to your azan file name -->
+	<audio id="azan-audio" src="azan.mp3" preload="auto"></audio>
+
 	<script>
+		/* Globals */
+		let userCoords = null;
+		let todayPrayerTimes = []; // { key, name, time (Date), timeStr24 }
+		let azanPlayedFor = null; // key of prayer already played
+		let isMuted = false;
+		let selectedDateGlobal = new Date();
+		const audio = document.getElementById('azan-audio');
+		audio.muted = isMuted;
+
+		// Unlock audio on first user click
+		document.addEventListener('click', async () => {
+			try {
+				await audio.play();
+				audio.pause();
+				audio.currentTime = 0;
+			} catch (e) {
+				console.warn('Audio unlock failed', e);
+			}
+		});
+
+
+		/* DOM helpers */
+		const $ = id => document.getElementById(id);
+
+		/* Digital clock */
 		function updateDigitalClock() {
 			const now = new Date();
 			let hours = now.getHours();
 			const minutes = now.getMinutes();
 			const seconds = now.getSeconds();
-			const ampm = hours >= 12 ? "PM" : "AM";
+			const ampm = hours >= 12 ? 'PM' : 'AM';
 			hours = hours % 12 || 12;
-
-			const timeStr = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-			document.getElementById("digital-clock").innerHTML = timeStr + "<br>" + ampm;
-
+			const timeStr = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+			$('digital-clock').innerHTML = `${timeStr}<br><span style="font-size:0.45em">${ampm}</span>`;
 		}
-
-		// Update clock every second
 		setInterval(updateDigitalClock, 1000);
-		// Initialize immediately
 		updateDigitalClock();
 
+		/* Toggle mute/unmute: attempt to unlock audio on unmute (user interaction) */
+		$('mute-btn').addEventListener('click', async () => {
+			isMuted = !isMuted;
+			audio.muted = isMuted;
+			$('mute-btn').textContent = isMuted ? '🔇' : '🔊';
+			if (!isMuted) {
+				try {
+					await audio.play();
+					audio.pause();
+					audio.currentTime = 0;
+				} catch (e) {
+					/* won't break if autoplay blocked */
+				}
+			}
+		});
+
+		/* Refresh button */
+		$('refresh-btn').addEventListener('click', () => {
+			if (userCoords) {
+				fetchPrayerTimes(selectedDateGlobal);
+				fetchWeather(userCoords.latitude, userCoords.longitude);
+			}
+		});
+
+		/* Format time to 12h (HH:MM AM/PM), accepts "HH:MM" or "HH:MM:SS" */
 		function formatTime12h(timeStr) {
-			// Accepts "HH:MM" or "HH:MM:SS"
-			let parts = timeStr.split(":");
-			let hour = Number(parts[0]);
-			let minute = Number(parts[1]);
-			let second = parts.length > 2 ? Number(parts[2]) : 0;
-
-			const ampm = hour >= 12 ? "PM" : "AM";
-			hour = hour % 12 || 12;
-
-			return `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+			const parts = timeStr.split(':').map(Number);
+			let h = parts[0],
+				m = parts[1] ?? 0;
+			const ampm = h >= 12 ? 'PM' : 'AM';
+			h = h % 12 || 12;
+			return `${h}:${String(m).padStart(2,'0')} ${ampm}`;
 		}
 
+		/* Utility to parse time string "HH:MM[:SS]" into Date on given date */
+		function getTimeObj(timeStr, date = selectedDateGlobal) {
+			const [h, m, s = '0'] = timeStr.split(':').map(Number);
+			const t = new Date(date);
+			t.setHours(Number(h), Number(m), Number(s || 0), 0);
+			return t;
+		}
+
+		async function fetchWeather(lat, lon) {
+			try {
+				// Request temperature in Fahrenheit
+				const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m&temperature_unit=fahrenheit`;
+				const res = await fetch(url);
+				const data = await res.json();
+
+				if (data && data.current) {
+					const temp = data.current.temperature_2m;
+					const wind = data.current.wind_speed_10m;
+					$('weather-temp').textContent = `🌡 ${temp}°F`;
+					$('weather-wind').textContent = `💨 ${wind} km/h`;
+					$('weather-icon').style.display = 'none';
+				} else {
+					$('weather-temp').textContent = '--';
+					$('weather-wind').textContent = '--';
+					console.warn('Weather response missing current', data);
+				}
+			} catch (err) {
+				console.error('fetchWeather error', err);
+				$('weather-temp').textContent = '--';
+				$('weather-wind').textContent = '--';
+			}
+		}
+
+		/* Main: fetch prayer times from Aladhan & render */
 		async function fetchPrayerTimes(selectedDate = new Date()) {
 			if (!userCoords) return;
+			selectedDateGlobal = selectedDate;
+			// Reset todayPrayerTimes
+			todayPrayerTimes = [];
+			azanPlayedFor = null; // reset for new day/load
+
 			const lat = userCoords.latitude;
 			const lon = userCoords.longitude;
-			const method = 2;
+			const method = 2; // you can expose this
 			const day = selectedDate.getDate();
 			const month = selectedDate.getMonth() + 1;
 			const year = selectedDate.getFullYear();
 
 			const url = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=${method}&month=${month}&year=${year}&school=1`;
 
-
-
 			try {
 				const res = await fetch(url);
-				const data = await res.json();
-				const today = data.data[day - 1];
+				const json = await res.json();
+				if (!json || json.code !== 200 || !json.data) throw new Error('Aladhan API error');
+				const today = json.data[day - 1];
 				const timings = today.timings;
-				const hijriDate = today.date.hijri;
-				const readableDate = today.date.readable;
+				const hijri = today.date.hijri;
+				const readable = today.date.readable;
 
-				document.getElementById('gregorian-date').textContent = `Today, ${readableDate}`;
-				document.getElementById('hijri-date').textContent = `${hijriDate.day} ${hijriDate.month.en} ${hijriDate.year}`;
+				$('gregorian-date').textContent = `Today, ${readable}`;
+				$('hijri-date').textContent = `${hijri.day} ${hijri.month.en} ${hijri.year}`;
 
+				// prayer order (Ishraq derived)
 				const prayerOrder = [{
 						name: "Imsak 🌙",
 						key: "Imsak"
@@ -290,9 +420,9 @@
 					{
 						name: "Ishraq 🌄",
 						key: "Ishraq",
-						derived: true
+						derived: true,
+						afterMinutes: 22
 					},
-
 					{
 						name: "Dhuhr ☀️",
 						key: "Dhuhr"
@@ -311,90 +441,85 @@
 					}
 				];
 
-
-
-				const prayerList = document.getElementById("prayer-list");
-				prayerList.innerHTML = "";
+				// Render prayers
+				const prayerList = $('prayer-list');
+				prayerList.innerHTML = '';
 				const now = new Date();
 				const nowTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
-
 				let nextPrayer = null;
 				let currentPrayer = null;
 
-				const getTimeObj = (timeStr) => {
-					let [h, m, s = "0"] = timeStr.split(":");
-					const t = new Date(selectedDate);
-					t.setHours(Number(h), Number(m), Number(s));
-					return t;
-				};
-
-				for (let i = 0; i < prayerOrder.length; i++) {
-					const prayer = prayerOrder[i];
+				for (const prayer of prayerOrder) {
 					let timeStr24;
-
-					// Derive Ishraq from Sunrise + 15 minutes
-					if (prayer.derived && prayer.key === "Ishraq") {
-						const sunriseTimeStr = timings["Sunrise"].split(" ")[0];
-						let [h, m] = sunriseTimeStr.split(":").map(Number);
-						m += 22;
-						if (m >= 60) {
-							h += 1;
-							m -= 60;
-						}
-						timeStr24 = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00`;
+					if (prayer.derived && prayer.key === 'Ishraq') {
+						// derived from Sunrise + afterMinutes
+						const sunriseRaw = timings['Sunrise'].split(' ')[0]; // "HH:MM"
+						const [sh, sm] = sunriseRaw.split(':').map(Number);
+						const total = sh * 60 + sm + (prayer.afterMinutes || 15);
+						const ih = Math.floor(total / 60) % 24;
+						const im = total % 60;
+						timeStr24 = `${String(ih).padStart(2,'0')}:${String(im).padStart(2,'0')}:00`;
 					} else {
-						timeStr24 = timings[prayer.key].split(" ")[0];
-						if (timeStr24.length === 5) timeStr24 += ":00";
+						if (!timings[prayer.key]) {
+							// fallback: skip if no timing
+							continue;
+						}
+						timeStr24 = timings[prayer.key].split(' ')[0];
+						if (timeStr24.length === 5) timeStr24 += ':00';
 					}
 
-					const prayerTime = getTimeObj(timeStr24);
+					const prayerTime = getTimeObj(timeStr24, selectedDate);
+					todayPrayerTimes.push({
+						key: prayer.key,
+						name: prayer.name,
+						time: prayerTime,
+						timeStr24
+					});
 
-					if (nowTime < prayerTime && !nextPrayer) {
-						nextPrayer = {
-							...prayer,
-							timeStr24,
-							time: prayerTime
-						};
-					}
-					if (nowTime >= prayerTime) {
-						currentPrayer = {
-							...prayer,
-							timeStr24,
-							time: prayerTime
-						};
-					}
+					if (nowTime < prayerTime && !nextPrayer) nextPrayer = {
+						...prayer,
+						time: prayerTime,
+						timeStr24
+					};
+					if (nowTime >= prayerTime) currentPrayer = {
+						...prayer,
+						time: prayerTime,
+						timeStr24
+					};
 
-					const isNow = currentPrayer?.key === prayer.key && (!nextPrayer || nowTime < nextPrayer.time);
-					const item = document.createElement("div");
-					item.className = "prayer-item";
-					item.innerHTML = `<span>${prayer.name}</span><span>${formatTime12h(timeStr24)}</span>`;
+					const isNow = currentPrayer && currentPrayer.key === prayer.key && (!nextPrayer || nowTime < nextPrayer.time);
+					const item = document.createElement('div');
+					item.className = 'prayer-item';
+					item.innerHTML = `<div>${prayer.name}${isNow?'<span class="now-tag">Now</span>':''}</div><div>${formatTime12h(timeStr24)}</div>`;
 					prayerList.appendChild(item);
 				}
 
+				$('current-prayer').innerHTML = currentPrayer ? `${currentPrayer.name}<br><span style="font-size:0.9em">${formatTime12h(currentPrayer.timeStr24)}</span>` : '--';
 
-				document.getElementById("current-prayer").innerHTML = `<span>${currentPrayer?.name || "--"}</span><br> <span>${currentPrayer ? formatTime12h(currentPrayer.timeStr24) : ""}</span>`;
+				// After we load prayer times also fetch weather (for same coords)
+				fetchWeather(lat, lon);
 
-			} catch (e) {
-				console.error("Prayer fetch error", e);
+			} catch (err) {
+				console.error('fetchPrayerTimes error', err);
 			}
 		}
 
-
+		/* Calendar UI */
 		function showWeek() {
-			switchTab("Week");
-			const calendar = document.getElementById("calendar");
-			calendar.innerHTML = "";
+			switchTab('Week');
+			const calendar = $('calendar');
+			calendar.innerHTML = '';
 			const now = new Date();
 			const start = new Date(now);
 			start.setDate(now.getDate() - now.getDay());
 			for (let i = 0; i < 7; i++) {
 				const date = new Date(start);
 				date.setDate(start.getDate() + i);
-				const isToday = date.toDateString() === now.toDateString();
-				const el = document.createElement("div");
-				el.className = `calendar-day ${isToday ? 'active' : ''}`;
-				el.innerHTML = `${date.toLocaleDateString('en-US', { weekday: 'short' })}<br>${date.getDate()}`;
-				el.addEventListener("click", () => {
+				const isToday = date.toDateString() === (new Date()).toDateString();
+				const el = document.createElement('div');
+				el.className = `calendar-day ${isToday?'active':''}`;
+				el.innerHTML = `${date.toLocaleDateString('en-US',{weekday:'short'})}<br>${date.getDate()}`;
+				el.addEventListener('click', () => {
 					fetchPrayerTimes(date);
 					highlightActiveDay(el);
 				});
@@ -402,35 +527,28 @@
 			}
 		}
 
-		function highlightActiveDay(selectedEl) {
-			const allDays = document.querySelectorAll(".calendar-day");
-			allDays.forEach(el => el.classList.remove("active"));
-			selectedEl.classList.add("active");
-		}
-
-
 		function showMonth() {
-			switchTab("Month");
-			const calendar = document.getElementById("calendar");
-			calendar.innerHTML = "";
+			switchTab('Month');
+			const calendar = $('calendar');
+			calendar.innerHTML = '';
 			const now = new Date();
-			const year = now.getFullYear();
-			const month = now.getMonth();
+			const year = now.getFullYear(),
+				month = now.getMonth();
 			const daysInMonth = new Date(year, month + 1, 0).getDate();
 			const firstDay = new Date(year, month, 1).getDay();
 			for (let i = 0; i < firstDay; i++) {
-				const empty = document.createElement("div");
-				empty.className = "calendar-day";
-				empty.innerHTML = "&nbsp;";
+				const empty = document.createElement('div');
+				empty.className = 'calendar-day';
+				empty.innerHTML = '&nbsp;';
 				calendar.appendChild(empty);
 			}
 			for (let d = 1; d <= daysInMonth; d++) {
 				const date = new Date(year, month, d);
 				const isToday = d === now.getDate();
-				const el = document.createElement("div");
-				el.className = `calendar-day ${isToday ? 'active' : ''}`;
-				el.innerHTML = `${date.toLocaleDateString('en-US', { weekday: 'short' })}<br>${d}`;
-				el.addEventListener("click", () => {
+				const el = document.createElement('div');
+				el.className = `calendar-day ${isToday?'active':''}`;
+				el.innerHTML = `${date.toLocaleDateString('en-US',{weekday:'short'})}<br>${d}`;
+				el.addEventListener('click', () => {
 					fetchPrayerTimes(date);
 					highlightActiveDay(el);
 				});
@@ -438,45 +556,75 @@
 			}
 		}
 
+		function highlightActiveDay(sel) {
+			document.querySelectorAll('.calendar-day').forEach(e => e.classList.remove('active'));
+			sel.classList.add('active');
+		}
+
 		function switchTab(tab) {
-			const buttons = document.querySelectorAll(".tabs button");
-			buttons.forEach(btn => {
-				btn.classList.remove("active");
-				if (btn.textContent === tab) btn.classList.add("active");
+			document.querySelectorAll('.tabs button').forEach(btn => {
+				btn.classList.remove('active');
+				if (btn.textContent === tab) btn.classList.add('active');
 			});
 		}
-		// Initial load
-		navigator.geolocation.getCurrentPosition(async (pos) => {
-			userCoords = pos.coords;
-			try {
-				const locRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${userCoords.latitude}&lon=${userCoords.longitude}`);
-				const locData = await locRes.json();
-				document.getElementById("location").textContent = `📍 ${locData.address.city || locData.address.town || locData.address.village || 'Your Location'}`;
-			} catch (e) {
-				document.getElementById("location").textContent = "📍 Location Unavailable";
+
+		/* Interval: check every second to play azan (once per prayer) */
+		setInterval(() => {
+			if (!todayPrayerTimes.length) return;
+			const now = new Date();
+			for (const p of todayPrayerTimes) {
+				const diff = now - p.time; // ms difference
+				// Trigger Azan if it's the exact prayer time within the first 59 seconds
+				if (diff >= 0 && diff < 59000 && azanPlayedFor !== p.key) {
+					if (!isMuted) {
+						audio.currentTime = 0;
+						audio.play().catch(e => console.warn('Audio blocked:', e));
+					}
+					azanPlayedFor = p.key;
+				}
 			}
-			fetchPrayerTimes();
+		}, 1000);
+
+
+		/* Geolocation and Boot */
+		navigator.geolocation.getCurrentPosition(async pos => {
+			userCoords = pos.coords;
+			// show textual location (reverse geocode)
+			try {
+				const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${userCoords.latitude}&lon=${userCoords.longitude}`);
+				const j = await r.json();
+				const place = j.address && (j.address.city || j.address.town || j.address.village || j.address.state) || '';
+				$('location').textContent = `📍 ${place || 'Your Location'}`;
+			} catch (e) {
+				$('location').textContent = '📍 Location Unavailable';
+			}
+			// fetch weather and prayers
+			fetchPrayerTimes(new Date());
+		}, err => {
+			console.error('Geolocation failed', err);
+			$('location').textContent = '📍 Location denied';
 		});
+
+		/* Unlock audio if user interacts with page (helps with autoplay policies) */
+		document.addEventListener('click', async () => {
+			try {
+				await audio.play();
+				audio.pause();
+				audio.currentTime = 0;
+			} catch (e) {}
+		});
+
+		/* initial calendar */
 		showWeek();
 
-
-
-		async function fetchWeather(lat, lon) {
-			const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m`;
-
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-
-				const temp = data.current.temperature_2m;
-				const wind = data.current.wind_speed_10m;
-
-				document.getElementById("weather-temp").textContent = `🌡 ${temp}°C`;
-				document.getElementById("weather-wind").textContent = `💨 ${wind} km/h`;
-			} catch (err) {
-				console.error("Weather fetch error", err);
+		// Auto-refresh data every 60 seconds
+		setInterval(() => {
+			const now = new Date();
+			if (userCoords) {
+				fetchPrayerTimes(now);
+				fetchWeather(userCoords.latitude, userCoords.longitude);
 			}
-		}
+		}, 60000);
 
 	</script>
 </body>
