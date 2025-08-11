@@ -2,13 +2,12 @@
 <html>
 
 <head>
-	<title>Geolocation Test</title>
+	<title>Geo Test</title>
 </head>
 
 <body>
-	<h2>Geolocation Test</h2>
 	<button onclick="getLocation()">Get Location</button>
-	<p id="status">Click the button to get location.</p>
+	<p id="status">Press the button to get location.</p>
 
 	<script>
 		function getLocation() {
@@ -20,11 +19,15 @@
 			status.textContent = 'Locating...';
 
 			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					status.textContent = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+				function(position) {
+					status.textContent = 'Latitude: ' + position.coords.latitude + ', Longitude: ' + position.coords.longitude;
+					console.log('Position:', position);
 				},
-				(error) => {
-					status.textContent = `Error: ${error.message}`;
+				function(error) {
+					status.textContent = 'Error: ' + error.message;
+					console.error('Geolocation error:', error);
+				}, {
+					timeout: 10000
 				}
 			);
 		}
