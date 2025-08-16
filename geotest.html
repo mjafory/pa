@@ -1,55 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Geo Test</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+			margin: 0;
+			background: #f0f0f0;
+		}
+
+		button {
+			padding: 12px 20px;
+			font-size: 16px;
+			border: none;
+			border-radius: 8px;
+			background: #0070f3;
+			color: white;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+
+		button:hover {
+			background: #0059c1;
+		}
+
+		#status {
+			margin-top: 20px;
+			font-size: 16px;
+			color: #333;
+			text-align: center;
+			max-width: 300px;
+		}
+
+	</style>
 </head>
 
 <body>
-	<button onclick="getLocation()">Get Location</button>
+	<button onclick="getLocation()">📍 Get Location</button>
 	<p id="status">Press the button to get location.</p>
 
 	<script>
-		async function getLocation() {
+		function getLocation() {
 			const status = document.getElementById('status');
 
 			if (!navigator.geolocation) {
-				status.textContent = 'Geolocation is not supported by your browser.';
+				status.textContent = "❌ Geolocation is not supported by this browser.";
 				return;
 			}
 
-			try {
-				// Check permission state if supported
-				if (navigator.permissions) {
-					const permission = await navigator.permissions.query({
-						name: 'geolocation'
-					});
-					if (permission.state === 'denied') {
-						status.textContent = 'Geolocation permission is denied. Please enable it in site settings.';
-						return;
+			status.textContent = "⏳ Requesting location...";
+
+			navigator.geolocation.getCurrentPosition(
+				pos => {
+					status.textContent =
+						`✅ Latitude: ${pos.coords.latitude}\nLongitude: ${pos.coords.longitude}`;
+					console.log("Position:", pos);
+				},
+				err => {
+					if (err.code === err.PERMISSION_DENIED) {
+						status.textContent = "❌ Permission denied. Enable it in Chrome → Site Settings → Location.";
+					} else if (err.code === err.POSITION_UNAVAILABLE) {
+						status.textContent = "⚠️ Location unavailable. Turn on GPS or network.";
+					} else if (err.code === err.TIMEOUT) {
+						status.textContent = "⏳ Location request timed out.";
+					} else {
+						status.textContent = "Error: " + err.message;
 					}
+					console.error("Geolocation error:", err);
+				}, {
+					enableHighAccuracy: true,
+					timeout: 10000,
+					maximumAge: 0
 				}
-
-				status.textContent = 'Locating...';
-
-				navigator.geolocation.getCurrentPosition(
-					pos => {
-						status.textContent =
-							`Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude}`;
-						console.log('Position:', pos);
-					},
-					err => {
-						status.textContent = 'Error: ' + err.message;
-						console.error('Geolocation error:', err);
-					}, {
-						enableHighAccuracy: true,
-						timeout: 10000,
-						maximumAge: 0
-					}
-				);
-			} catch (err) {
-				status.textContent = 'Error checking permissions: ' + err.message;
-			}
+			);
 		}
 
 	</script>
