@@ -37,7 +37,8 @@
 			font-size: 16px;
 			color: #333;
 			text-align: center;
-			max-width: 300px;
+			max-width: 320px;
+			white-space: pre-line;
 		}
 
 	</style>
@@ -49,7 +50,7 @@
 
 	<script>
 		function getLocation() {
-			const status = document.getElementById('status');
+			const status = document.getElementById("status");
 
 			if (!navigator.geolocation) {
 				status.textContent = "❌ Geolocation is not supported by this browser.";
@@ -58,11 +59,17 @@
 
 			status.textContent = "⏳ Requesting location...";
 
+			console.log("Requesting location with settings:", {
+				enableHighAccuracy: false,
+				timeout: 15000,
+				maximumAge: 60000
+			});
+
 			navigator.geolocation.getCurrentPosition(
 				pos => {
 					status.textContent =
-						`✅ Latitude: ${pos.coords.latitude}\nLongitude: ${pos.coords.longitude}`;
-					console.log("Position:", pos);
+						`✅ Location found!\nLatitude: ${pos.coords.latitude}\nLongitude: ${pos.coords.longitude}`;
+					console.log("Position object:", pos);
 				},
 				err => {
 					if (err.code === err.PERMISSION_DENIED) {
@@ -70,15 +77,15 @@
 					} else if (err.code === err.POSITION_UNAVAILABLE) {
 						status.textContent = "⚠️ Location unavailable. Turn on GPS or network.";
 					} else if (err.code === err.TIMEOUT) {
-						status.textContent = "⏳ Location request timed out.";
+						status.textContent = "⏳ Location request timed out. Try going outside or enable Wi-Fi/GPS.";
 					} else {
 						status.textContent = "Error: " + err.message;
 					}
 					console.error("Geolocation error:", err);
 				}, {
-					enableHighAccuracy: true,
-					timeout: 10000,
-					maximumAge: 0
+					enableHighAccuracy: false, // use Wi-Fi/cell towers if GPS fails
+					timeout: 15000, // wait max 15s
+					maximumAge: 60000 // allow cached result up to 1min old
 				}
 			);
 		}
