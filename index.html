@@ -160,6 +160,12 @@
 			width: 45px;
 			text-align: center;
 			font-size: 14px;
+			position: relative;
+			left: 10%;
+			top: 30px;
+			/* optional: vertical center */
+			transform: translate(-50%, -50%);
+			/* offset half width & height */
 			margin: 0;
 			cursor: pointer;
 			padding: 4px;
@@ -198,6 +204,7 @@
 
 		.calendar-day.active {
 			background: white;
+			text-align: center;
 			color: black;
 			font-weight: bold;
 		}
@@ -527,7 +534,7 @@
 			const now = new Date();
 			const start = new Date(now);
 			start.setDate(now.getDate() - now.getDay());
-			for (let i = 0; i < 7; i++) {
+			for (let i = 0; i < 14; i++) {
 				const date = new Date(start);
 				date.setDate(start.getDate() + i);
 				const isToday = date.toDateString() === (new Date()).toDateString();
